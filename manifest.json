@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "LocalhostSwitcher",
+  "version": "1.0.0",
+  "description": "Reopen the current page on localhost:4200, copying selected cookies across.",
+  "permissions": ["cookies", "storage"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_title": "Switch to localhost:4200",
+    "default_icon": { "16": "icons/icon16.png", "24": "icons/icon24.png", "32": "icons/icon32.png" }
+  },
+  "icons": {
+    "16": "icons/icon16.png", "24": "icons/icon24.png", "32": "icons/icon32.png",
+    "48": "icons/icon48.png", "128": "icons/icon128.png"
+  },
+  "options_ui": { "page": "options.html", "open_in_tab": true }
+}

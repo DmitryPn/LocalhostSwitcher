@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LocalhostSwitcher — cookies</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #202124;
+      --muted: #5f6368;
+      --border: #dadce0;
+      --row-hover: #f1f3f4;
+      --accent: #1565c0;
+      --danger: #c5221f;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #202124;
+        --fg: #e8eaed;
+        --muted: #9aa0a6;
+        --border: #3c4043;
+        --row-hover: #292a2d;
+        --accent: #8ab4f8;
+        --danger: #f28b82;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px;
+      background: var(--bg);
+      color: var(--fg);
+      font: 13px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    h1 { font-size: 16px; font-weight: 600; margin: 0 0 4px; }
+    p.sub { color: var(--muted); margin: 0 0 20px; max-width: 52ch; }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 480px;
+      font-variant-numeric: tabular-nums;
+    }
+    th {
+      text-align: left;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    td {
+      padding: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    tr:hover td { background: var(--row-hover); }
+    .name-cell {
+      padding: 8px 10px;
+      cursor: text;
+      font-family: "SF Mono", "Cascadia Mono", Consolas, "Roboto Mono", monospace;
+      white-space: pre;
+    }
+    .name-cell input {
+      width: 100%;
+      border: 1px solid var(--accent);
+      border-radius: 3px;
+      padding: 6px 8px;
+      background: var(--bg);
+      color: var(--fg);
+      font: inherit;
+      outline: none;
+    }
+    .actions-cell {
+      width: 44px;
+      text-align: center;
+    }
+    button.remove {
+      border: none;
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      padding: 6px 10px;
+      border-radius: 3px;
+    }
+    button.remove:hover { color: var(--danger); }
+    button.add {
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--accent);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 4px;
+    }
+    button.add:hover { border-color: var(--accent); }
+    .empty { color: var(--muted); font-style: italic; padding: 12px 10px; }
+  </style>
+</head>
+<body>
+  <h1>LocalhostSwitcher</h1>
+  <p class="sub">
+    Cookies copied to <code>localhost:4200</code> when you click the toolbar button.
+    Double-click a name to edit. Changes save automatically.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Cookie name</th>
+        <th class="actions-cell"></th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <button class="add" id="add">+ Add</button>
+  <script src="options.js"></script>
+</body>
+</html>
