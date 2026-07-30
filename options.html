@@ -101,6 +101,30 @@
     }
     button.add:hover { border-color: var(--accent); }
     .empty { color: var(--muted); font-style: italic; padding: 12px 10px; }
+    .setting {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 480px;
+    }
+    .setting label {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    select {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 6px 8px;
+      background: var(--bg);
+      color: var(--fg);
+      font: inherit;
+      cursor: pointer;
+    }
+    select:hover { border-color: var(--accent); }
   </style>
 </head>
 <body>
@@ -119,6 +143,16 @@
     <tbody id="rows"></tbody>
   </table>
   <button class="add" id="add">+ Add</button>
+
+  <div class="setting">
+    <label for="open-mode">Open the page in</label>
+    <select id="open-mode">
+      <option value="sameTab">Same tab</option>
+      <option value="newTab">New tab</option>
+      <option value="newWindow">New window</option>
+    </select>
+  </div>
+
   <script src="options.js"></script>
 </body>
 </html>

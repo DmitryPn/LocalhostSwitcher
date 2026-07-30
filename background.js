@@ -1,5 +1,6 @@
 const TARGET_ORIGIN = 'http://localhost:4200';
 const DEFAULT_COOKIE_NAMES = ['__machineid__', 'secid'];
+const DEFAULT_OPEN_MODE = 'sameTab';   // 'sameTab' | 'newTab' | 'newWindow'
 
 chrome.runtime.onInstalled.addListener(async () => {
   // Seed the default cookie list only if nothing is stored yet.
@@ -29,8 +30,9 @@ chrome.action.onClicked.addListener(async (tab) => {
 
   // 2. Read config fresh every click — the MV3 service worker is ephemeral,
   //    so nothing may be cached in module scope.
-  const { cookieNames } = await chrome.storage.sync.get({
-    cookieNames: DEFAULT_COOKIE_NAMES
+  const { cookieNames, openMode } = await chrome.storage.sync.get({
+    cookieNames: DEFAULT_COOKIE_NAMES,
+    openMode: DEFAULT_OPEN_MODE
   });
 
   // 3. Copy each cookie. Independent: one failure must not stop the rest.
@@ -60,6 +62,19 @@ chrome.action.onClicked.addListener(async (tab) => {
     }
   }
 
-  // 4. Only after every write has settled.
-  await chrome.windows.create({ url: target.toString() });
+  // 4. Only after every write has settled. Where it opens is configurable;
+  //    default is the same tab (navigate the current tab in place).
+  const url = target.toString();
+  switch (openMode) {
+    case 'newTab':
+      await chrome.tabs.create({ url });
+      break;
+    case 'newWindow':
+      await chrome.windows.create({ url });
+      break;
+    case 'sameTab':
+    default:
+      await chrome.tabs.update(tab.id, { url });
+      break;
+  }
 });

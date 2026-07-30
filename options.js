@@ -1,15 +1,19 @@
 const DEFAULT_COOKIE_NAMES = ['__machineid__', 'secid'];
+const DEFAULT_OPEN_MODE = 'sameTab';
 
 const tbody = document.getElementById('rows');
 const addBtn = document.getElementById('add');
+const openModeSelect = document.getElementById('open-mode');
 
 let names = [];
 
 async function load() {
-  const { cookieNames } = await chrome.storage.sync.get({
-    cookieNames: DEFAULT_COOKIE_NAMES
+  const { cookieNames, openMode } = await chrome.storage.sync.get({
+    cookieNames: DEFAULT_COOKIE_NAMES,
+    openMode: DEFAULT_OPEN_MODE
   });
   names = cookieNames.slice();
+  openModeSelect.value = openMode;
   render();
 }
 
@@ -126,6 +130,11 @@ addBtn.addEventListener('click', () => {
   if (names.length === 0) tbody.textContent = '';
   tbody.appendChild(tr);
   edit(nameTd, null);
+});
+
+// Autosave the open-mode dropdown on change — no Save button, matching the table.
+openModeSelect.addEventListener('change', () => {
+  chrome.storage.sync.set({ openMode: openModeSelect.value });
 });
 
 load();

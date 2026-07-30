@@ -11,7 +11,7 @@ On toolbar click:
 1. Takes the active tab's URL.
 2. Swaps the origin for `http://localhost:4200`, preserving path + query + hash.
 3. Copies the configured cookies from the source domain to `localhost`.
-4. Opens the result in a new window.
+4. Opens the result — in the same tab by default, or a new tab / new window (configurable in options).
 
 No popup, no notifications, no error surfaces — including when cookies are missing. It either
 works quietly or does nothing quietly.
@@ -35,6 +35,9 @@ page lists the cookie names copied to `localhost:4200`:
 - Changes save automatically. Empty and duplicate names are rejected.
 
 Seeded defaults: `__machineid__`, `secid`.
+
+The **Open the page in** dropdown controls where the switched page opens — **Same tab**
+(default), **New tab**, or **New window**. It also saves automatically.
 
 ## Regenerating icons
 
